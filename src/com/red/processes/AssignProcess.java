@@ -17,6 +17,8 @@ import org.compiere.model.MUser;
 public class AssignProcess extends SvrProcess{
 	private int userId;
 	private int assetId;
+	private int activityId;
+	private int locationId;
 	private Timestamp date;
 	
 	@Override
@@ -30,6 +32,10 @@ public class AssignProcess extends SvrProcess{
 				userId = para.getParameterAsInt();
 			}else if(paraName.equalsIgnoreCase("A_Asset_ID")) {
 				assetId = para.getParameterAsInt();
+			}else if(paraName.equalsIgnoreCase("C_Activity_ID")) {
+				activityId = para.getParameterAsInt();
+			}else if(paraName.equalsIgnoreCase("C_Location_ID")) {
+				locationId = para.getParameterAsInt();
 			}
 			else {
 				log.log(Level.SEVERE, "Unknown Parameter "+ paraName);
@@ -65,7 +71,8 @@ public class AssignProcess extends SvrProcess{
 			assignment.setName(user.getName());
 			assignment.setAD_Org_ID(user.getAD_Org_ID());
 			assignment.setisAssigned(true);
-			assignment.setC_Location_ID(user.getC_Location_ID());
+			assignment.setC_Location_ID(locationId);
+			assignment.setC_Activity_ID(activityId);
 			assignment.saveEx();
 			
 		}catch(Exception e) {
