@@ -7,7 +7,11 @@ import java.sql.Timestamp;
 import org.compiere.process.ProcessInfoParameter;
 import org.adempiere.exceptions.AdempiereException;
 import org.compiere.process.SvrProcess;
+import org.compiere.util.Env;
+
+import com.red.models.MAssetAssignment;
 import org.compiere.model.MAsset;
+import org.compiere.model.MUser;
 
 
 public class AssignProcess extends SvrProcess{
@@ -37,7 +41,8 @@ public class AssignProcess extends SvrProcess{
 	protected String doIt() throws Exception{
 		// TODO Auto-generated method stub
 		MAsset asset = new MAsset(null, assetId, null);
-	
+		MUser user = new MUser(null, userId, null);
+		MAssetAssignment assignment = new MAssetAssignment(Env.getCtx(),0,null);
 		
 		addLog("Assign Asset");
 		addLog(getProcessInfo().getAD_Process_ID(), 
@@ -53,9 +58,19 @@ public class AssignProcess extends SvrProcess{
 		try {			
 			asset.setAD_User_ID(userId);
 			asset.saveEx();
+			
+			assignment.setA_Asset_ID(assetId);
+			assignment.setAD_User_ID(userId);
+			assignment.setAssignment_Date(new Timestamp(System.currentTimeMillis()));
+			assignment.setName(user.getName());
+			assignment.setAD_Org_ID(user.getAD_Org_ID());
+			assignment.setisAssigned(true);
+			assignment.setC_Location_ID(user.getC_Location_ID());
+			assignment.saveEx();
+			
 		}catch(Exception e) {
 			// TODO: handle exception
-		
+			
 			throw new AdempiereException(e);
 		}
 		

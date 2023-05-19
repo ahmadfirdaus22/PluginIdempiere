@@ -1,0 +1,43 @@
+package com.red.factories;
+
+import java.sql.ResultSet;
+
+import org.adempiere.base.IModelFactory;
+import org.compiere.model.PO;
+import org.compiere.util.Env;
+
+import com.red.models.MAssetAssignment;
+
+public class AssignModelFactory implements IModelFactory{
+
+	@Override
+	public Class<?> getClass(String tableName) {
+		// TODO Auto-generated method stub
+		
+		if(tableName.equalsIgnoreCase(MAssetAssignment.Table_Name))
+			return MAssetAssignment.class;
+		
+		return null;
+	}
+
+	@Override
+	public PO getPO(String tableName, int Record_ID, String trxName) {
+		// TODO Auto-generated method stub
+		
+		if(tableName.equalsIgnoreCase(MAssetAssignment.Table_Name))
+			return new MAssetAssignment(Env.getCtx(), Record_ID, trxName);
+		return null;
+	}
+
+	@Override
+	public PO getPO(String tableName, ResultSet rs, String trxName) {
+		// TODO Auto-generated method stub
+		
+		if(tableName.equalsIgnoreCase(MAssetAssignment.Table_Name))
+			return new MAssetAssignment(Env.getCtx(), rs, trxName);
+		
+		return null;
+	}
+	
+	
+}
