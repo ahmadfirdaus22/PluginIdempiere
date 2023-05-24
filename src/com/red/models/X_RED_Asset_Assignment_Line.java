@@ -18,46 +18,45 @@
 package com.red.models;
 
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.util.Properties;
 import org.compiere.model.*;
 
-/** Generated Model for RED_asset_assignment
+/** Generated Model for RED_Asset_Assignment_Line
  *  @author iDempiere (generated) 
  *  @version Release 10 - $Id$ */
-@org.adempiere.base.Model(table="RED_asset_assignment")
-public class X_RED_asset_assignment extends PO implements I_RED_asset_assignment, I_Persistent 
+@org.adempiere.base.Model(table="RED_Asset_Assignment_Line")
+public class X_RED_Asset_Assignment_Line extends PO implements I_RED_Asset_Assignment_Line, I_Persistent 
 {
 
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20230519L;
+	private static final long serialVersionUID = 20230523L;
 
     /** Standard Constructor */
-    public X_RED_asset_assignment (Properties ctx, int RED_asset_assignment_ID, String trxName)
+    public X_RED_Asset_Assignment_Line (Properties ctx, int RED_Asset_Assignment_Line_ID, String trxName)
     {
-      super (ctx, RED_asset_assignment_ID, trxName);
-      /** if (RED_asset_assignment_ID == 0)
+      super (ctx, RED_Asset_Assignment_Line_ID, trxName);
+      /** if (RED_Asset_Assignment_Line_ID == 0)
         {
-			setName (null);
-			setred_asset_assignment_ID (0);
+			setAD_User_ID (0);
+			setRED_Asset_Assignment_Line_ID (0);
         } */
     }
 
     /** Standard Constructor */
-    public X_RED_asset_assignment (Properties ctx, int RED_asset_assignment_ID, String trxName, String ... virtualColumns)
+    public X_RED_Asset_Assignment_Line (Properties ctx, int RED_Asset_Assignment_Line_ID, String trxName, String ... virtualColumns)
     {
-      super (ctx, RED_asset_assignment_ID, trxName, virtualColumns);
-      /** if (RED_asset_assignment_ID == 0)
+      super (ctx, RED_Asset_Assignment_Line_ID, trxName, virtualColumns);
+      /** if (RED_Asset_Assignment_Line_ID == 0)
         {
-			setName (null);
-			setred_asset_assignment_ID (0);
+			setAD_User_ID (0);
+			setRED_Asset_Assignment_Line_ID (0);
         } */
     }
 
     /** Load Constructor */
-    public X_RED_asset_assignment (Properties ctx, ResultSet rs, String trxName)
+    public X_RED_Asset_Assignment_Line (Properties ctx, ResultSet rs, String trxName)
     {
       super (ctx, rs, trxName);
     }
@@ -79,8 +78,8 @@ public class X_RED_asset_assignment extends PO implements I_RED_asset_assignment
 
     public String toString()
     {
-      StringBuilder sb = new StringBuilder ("X_RED_asset_assignment[")
-        .append(get_ID()).append(",Name=").append(getName()).append("]");
+      StringBuilder sb = new StringBuilder ("X_RED_Asset_Assignment_Line[")
+        .append(get_ID()).append("]");
       return sb.toString();
     }
 
@@ -124,9 +123,9 @@ public class X_RED_asset_assignment extends PO implements I_RED_asset_assignment
 	public void setAD_User_ID (int AD_User_ID)
 	{
 		if (AD_User_ID < 1)
-			set_ValueNoCheck (COLUMNNAME_AD_User_ID, null);
+			set_Value (COLUMNNAME_AD_User_ID, null);
 		else
-			set_ValueNoCheck (COLUMNNAME_AD_User_ID, Integer.valueOf(AD_User_ID));
+			set_Value (COLUMNNAME_AD_User_ID, Integer.valueOf(AD_User_ID));
 	}
 
 	/** Get User/Contact.
@@ -138,21 +137,6 @@ public class X_RED_asset_assignment extends PO implements I_RED_asset_assignment
 		if (ii == null)
 			 return 0;
 		return ii.intValue();
-	}
-
-	/** Set Assignment_Date.
-		@param Assignment_Date Assignment_Date
-	*/
-	public void setAssignment_Date (Timestamp Assignment_Date)
-	{
-		set_ValueNoCheck (COLUMNNAME_Assignment_Date, Assignment_Date);
-	}
-
-	/** Get Assignment_Date.
-		@return Assignment_Date	  */
-	public Timestamp getAssignment_Date()
-	{
-		return (Timestamp)get_Value(COLUMNNAME_Assignment_Date);
 	}
 
 	public org.compiere.model.I_C_Activity getC_Activity() throws RuntimeException
@@ -211,74 +195,10 @@ public class X_RED_asset_assignment extends PO implements I_RED_asset_assignment
 		return ii.intValue();
 	}
 
-	/** Set Description.
-		@param Description Optional short description of the record
-	*/
-	public void setDescription (String Description)
+	public I_RED_Asset_Assignment getRED_Asset_Assignment() throws RuntimeException
 	{
-		set_Value (COLUMNNAME_Description, Description);
-	}
-
-	/** Get Description.
-		@return Optional short description of the record
-	  */
-	public String getDescription()
-	{
-		return (String)get_Value(COLUMNNAME_Description);
-	}
-
-	/** Set Comment/Help.
-		@param Help Comment or Hint
-	*/
-	public void setHelp (String Help)
-	{
-		set_Value (COLUMNNAME_Help, Help);
-	}
-
-	/** Get Comment/Help.
-		@return Comment or Hint
-	  */
-	public String getHelp()
-	{
-		return (String)get_Value(COLUMNNAME_Help);
-	}
-
-	/** Set isAssigned.
-		@param isAssigned isAssigned
-	*/
-	public void setisAssigned (boolean isAssigned)
-	{
-		set_Value (COLUMNNAME_isAssigned, Boolean.valueOf(isAssigned));
-	}
-
-	/** Get isAssigned.
-		@return isAssigned	  */
-	public boolean isAssigned()
-	{
-		Object oo = get_Value(COLUMNNAME_isAssigned);
-		if (oo != null) 
-		{
-			 if (oo instanceof Boolean) 
-				 return ((Boolean)oo).booleanValue(); 
-			return "Y".equals(oo);
-		}
-		return false;
-	}
-
-	/** Set Name.
-		@param Name Alphanumeric identifier of the entity
-	*/
-	public void setName (String Name)
-	{
-		set_Value (COLUMNNAME_Name, Name);
-	}
-
-	/** Get Name.
-		@return Alphanumeric identifier of the entity
-	  */
-	public String getName()
-	{
-		return (String)get_Value(COLUMNNAME_Name);
+		return (I_RED_Asset_Assignment)MTable.get(getCtx(), I_RED_Asset_Assignment.Table_ID)
+			.getPO(getred_asset_assignment_ID(), get_TrxName());
 	}
 
 	/** Set red_asset_assignment.
@@ -302,34 +222,45 @@ public class X_RED_asset_assignment extends PO implements I_RED_asset_assignment
 		return ii.intValue();
 	}
 
-	/** Set red_asset_assignment_UU.
-		@param red_asset_assignment_UU red_asset_assignment_UU
+	/** Set RED_Asset_Assignment_Line.
+		@param RED_Asset_Assignment_Line_ID RED_Asset_Assignment_Line
 	*/
-	public void setred_asset_assignment_UU (String red_asset_assignment_UU)
+	public void setRED_Asset_Assignment_Line_ID (int RED_Asset_Assignment_Line_ID)
 	{
-		set_Value (COLUMNNAME_red_asset_assignment_UU, red_asset_assignment_UU);
+		if (RED_Asset_Assignment_Line_ID < 1)
+			set_ValueNoCheck (COLUMNNAME_RED_Asset_Assignment_Line_ID, null);
+		else
+			set_ValueNoCheck (COLUMNNAME_RED_Asset_Assignment_Line_ID, Integer.valueOf(RED_Asset_Assignment_Line_ID));
 	}
 
-	/** Get red_asset_assignment_UU.
-		@return red_asset_assignment_UU	  */
-	public String getred_asset_assignment_UU()
+	/** Get RED_Asset_Assignment_Line.
+		@return RED_Asset_Assignment_Line	  */
+	public int getRED_Asset_Assignment_Line_ID()
 	{
-		return (String)get_Value(COLUMNNAME_red_asset_assignment_UU);
+		Integer ii = (Integer)get_Value(COLUMNNAME_RED_Asset_Assignment_Line_ID);
+		if (ii == null)
+			 return 0;
+		return ii.intValue();
 	}
 
-	/** Set Search Key.
-		@param Value Search key for the record in the format required - must be unique
+	/** Set RED_Asset_Assignment_Line_UU.
+		@param RED_Asset_Assignment_Line_UU RED_Asset_Assignment_Line_UU
 	*/
-	public void setValue (String Value)
+	public void setRED_Asset_Assignment_Line_UU (String RED_Asset_Assignment_Line_UU)
 	{
-		set_Value (COLUMNNAME_Value, Value);
+		set_Value (COLUMNNAME_RED_Asset_Assignment_Line_UU, RED_Asset_Assignment_Line_UU);
 	}
 
-	/** Get Search Key.
-		@return Search key for the record in the format required - must be unique
-	  */
-	public String getValue()
+	/** Get RED_Asset_Assignment_Line_UU.
+		@return RED_Asset_Assignment_Line_UU	  */
+	public String getRED_Asset_Assignment_Line_UU()
 	{
-		return (String)get_Value(COLUMNNAME_Value);
+		return (String)get_Value(COLUMNNAME_RED_Asset_Assignment_Line_UU);
+	}
+
+	@Override
+	public I_RED_Asset_Assignment getred_asset_assignment() throws RuntimeException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

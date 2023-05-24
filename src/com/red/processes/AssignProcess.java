@@ -10,6 +10,7 @@ import org.compiere.process.SvrProcess;
 import org.compiere.util.Env;
 
 import com.red.models.MAssetAssignment;
+import com.red.models.MAssetAssignmentLine;
 import org.compiere.model.MAsset;
 import org.compiere.model.MUser;
 
@@ -20,7 +21,8 @@ public class AssignProcess extends SvrProcess{
 	private int activityId;
 	private int locationId;
 	private Timestamp date;
-	
+	private String docname;
+	 
 	@Override
 	protected void prepare() {
 		// TODO Auto-generated method stub
@@ -36,6 +38,8 @@ public class AssignProcess extends SvrProcess{
 				activityId = para.getParameterAsInt();
 			}else if(paraName.equalsIgnoreCase("C_Location_ID")) {
 				locationId = para.getParameterAsInt();
+			}else if(paraName.equalsIgnoreCase("Name")) {
+				docname = para.getParameterAsString();
 			}
 			else {
 				log.log(Level.SEVERE, "Unknown Parameter "+ paraName);
@@ -49,6 +53,8 @@ public class AssignProcess extends SvrProcess{
 		MAsset asset = new MAsset(null, assetId, null);
 		MUser user = new MUser(null, userId, null);
 		MAssetAssignment assignment = new MAssetAssignment(Env.getCtx(),0,null);
+		MAssetAssignmentLine line = new MAssetAssignmentLine(Env.getCtx(), 0, null);
+		Timestamp dateTime = new Timestamp(System.currentTimeMillis());
 		
 		addLog("Assign Asset");
 		addLog(getProcessInfo().getAD_Process_ID(), 
@@ -61,18 +67,27 @@ public class AssignProcess extends SvrProcess{
 				"Asset : " + asset.getName());
 		
 		
-		try {			
+		try {				
 			asset.setAD_User_ID(userId);
 			asset.saveEx();
 			
-			assignment.setA_Asset_ID(assetId);
-			assignment.setAD_User_ID(userId);
+			assignment.setC_DocType_ID(1000000);
+			assignment.setC_DocTypeTarget_ID(1000000);
+			assignment.setName(docname);
 			assignment.setAssignment_Date(new Timestamp(System.currentTimeMillis()));
-			assignment.setName(user.getName());
-			assignment.setAD_Org_ID(user.getAD_Org_ID());
 			assignment.setisAssigned(true);
-			assignment.setC_Location_ID(locationId);
-			assignment.setC_Activity_ID(activityId);
+			assignment.setIsApproved(true);
+			assignment.saveEx();
+
+			line.setA_Asset_ID(assetId);
+			line.setC_Activity_ID(activityId);
+			line.setC_Location_ID(locationId);
+			line.setAD_Org_ID(user.getAD_Org_ID());
+			line.setAD_User_ID(userId);
+			line.setred_asset_assignment_ID(assignment.get_ID());
+			line.saveEx();
+			
+			assignment.completeIt();
 			assignment.saveEx();
 			
 		}catch(Exception e) {

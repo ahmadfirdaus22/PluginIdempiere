@@ -14,25 +14,25 @@
  * ComPiere, Inc., 2620 Augustine Dr. #245, Santa Clara, CA 95054, USA        *
  * or via info@compiere.org or http://www.compiere.org/license.html           *
  *****************************************************************************/
-package org.compiere.models;
+package com.red.models;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import org.compiere.model.*;
 import org.compiere.util.KeyNamePair;
 
-/** Generated Interface for RED_asset_assignment
+/** Generated Interface for RED_Asset_Assignment_Line
  *  @author iDempiere (generated) 
  *  @version Release 10
  */
 @SuppressWarnings("all")
-public interface I_RED_asset_assignment 
+public interface I_RED_Asset_Assignment_Line 
 {
 
-    /** TableName=RED_asset_assignment */
-    public static final String Table_Name = "RED_asset_assignment";
+    /** TableName=RED_Asset_Assignment_Line */
+    public static final String Table_Name = "RED_Asset_Assignment_Line";
 
-    /** AD_Table_ID=1000005 */
+    /** AD_Table_ID=1000016 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
@@ -94,15 +94,6 @@ public interface I_RED_asset_assignment
 
 	public org.compiere.model.I_AD_User getAD_User() throws RuntimeException;
 
-    /** Column name Assignment_Date */
-    public static final String COLUMNNAME_Assignment_Date = "Assignment_Date";
-
-	/** Set Assignment_Date	  */
-	public void setAssignment_Date (Timestamp Assignment_Date);
-
-	/** Get Assignment_Date	  */
-	public Timestamp getAssignment_Date();
-
     /** Column name C_Activity_ID */
     public static final String COLUMNNAME_C_Activity_ID = "C_Activity_ID";
 
@@ -149,32 +140,6 @@ public interface I_RED_asset_assignment
 	  */
 	public int getCreatedBy();
 
-    /** Column name Description */
-    public static final String COLUMNNAME_Description = "Description";
-
-	/** Set Description.
-	  * Optional short description of the record
-	  */
-	public void setDescription (String Description);
-
-	/** Get Description.
-	  * Optional short description of the record
-	  */
-	public String getDescription();
-
-    /** Column name Help */
-    public static final String COLUMNNAME_Help = "Help";
-
-	/** Set Comment/Help.
-	  * Comment or Hint
-	  */
-	public void setHelp (String Help);
-
-	/** Get Comment/Help.
-	  * Comment or Hint
-	  */
-	public String getHelp();
-
     /** Column name IsActive */
     public static final String COLUMNNAME_IsActive = "IsActive";
 
@@ -188,19 +153,6 @@ public interface I_RED_asset_assignment
 	  */
 	public boolean isActive();
 
-    /** Column name Name */
-    public static final String COLUMNNAME_Name = "Name";
-
-	/** Set Name.
-	  * Alphanumeric identifier of the entity
-	  */
-	public void setName (String Name);
-
-	/** Get Name.
-	  * Alphanumeric identifier of the entity
-	  */
-	public String getName();
-
     /** Column name red_asset_assignment_ID */
     public static final String COLUMNNAME_red_asset_assignment_ID = "red_asset_assignment_ID";
 
@@ -210,14 +162,25 @@ public interface I_RED_asset_assignment
 	/** Get red_asset_assignment	  */
 	public int getred_asset_assignment_ID();
 
-    /** Column name red_asset_assignment_UU */
-    public static final String COLUMNNAME_red_asset_assignment_UU = "red_asset_assignment_UU";
+	public I_RED_Asset_Assignment getred_asset_assignment() throws RuntimeException;
 
-	/** Set red_asset_assignment_UU	  */
-	public void setred_asset_assignment_UU (String red_asset_assignment_UU);
+    /** Column name RED_Asset_Assignment_Line_ID */
+    public static final String COLUMNNAME_RED_Asset_Assignment_Line_ID = "RED_Asset_Assignment_Line_ID";
 
-	/** Get red_asset_assignment_UU	  */
-	public String getred_asset_assignment_UU();
+	/** Set RED_Asset_Assignment_Line	  */
+	public void setRED_Asset_Assignment_Line_ID (int RED_Asset_Assignment_Line_ID);
+
+	/** Get RED_Asset_Assignment_Line	  */
+	public int getRED_Asset_Assignment_Line_ID();
+
+    /** Column name RED_Asset_Assignment_Line_UU */
+    public static final String COLUMNNAME_RED_Asset_Assignment_Line_UU = "RED_Asset_Assignment_Line_UU";
+
+	/** Set RED_Asset_Assignment_Line_UU	  */
+	public void setRED_Asset_Assignment_Line_UU (String RED_Asset_Assignment_Line_UU);
+
+	/** Get RED_Asset_Assignment_Line_UU	  */
+	public String getRED_Asset_Assignment_Line_UU();
 
     /** Column name Updated */
     public static final String COLUMNNAME_Updated = "Updated";
@@ -234,17 +197,4 @@ public interface I_RED_asset_assignment
 	  * User who updated this records
 	  */
 	public int getUpdatedBy();
-
-    /** Column name Value */
-    public static final String COLUMNNAME_Value = "Value";
-
-	/** Set Search Key.
-	  * Search key for the record in the format required - must be unique
-	  */
-	public void setValue (String Value);
-
-	/** Get Search Key.
-	  * Search key for the record in the format required - must be unique
-	  */
-	public String getValue();
 }

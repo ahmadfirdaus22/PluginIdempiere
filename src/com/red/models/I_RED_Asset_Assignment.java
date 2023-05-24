@@ -21,18 +21,18 @@ import java.sql.Timestamp;
 import org.compiere.model.*;
 import org.compiere.util.KeyNamePair;
 
-/** Generated Interface for RED_asset_assignment
+/** Generated Interface for RED_Asset_Assignment
  *  @author iDempiere (generated) 
  *  @version Release 10
  */
 @SuppressWarnings("all")
-public interface I_RED_asset_assignment 
+public interface I_RED_Asset_Assignment 
 {
 
-    /** TableName=RED_asset_assignment */
-    public static final String Table_Name = "RED_asset_assignment";
+    /** TableName=RED_Asset_Assignment */
+    public static final String Table_Name = "RED_Asset_Assignment";
 
-    /** AD_Table_ID=1000005 */
+    /** AD_Table_ID=1000015 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
@@ -42,21 +42,6 @@ public interface I_RED_asset_assignment
     BigDecimal accessLevel = BigDecimal.valueOf(3);
 
     /** Load Meta Data */
-
-    /** Column name A_Asset_ID */
-    public static final String COLUMNNAME_A_Asset_ID = "A_Asset_ID";
-
-	/** Set Asset.
-	  * Asset used internally or by customers
-	  */
-	public void setA_Asset_ID (int A_Asset_ID);
-
-	/** Get Asset.
-	  * Asset used internally or by customers
-	  */
-	public int getA_Asset_ID();
-
-	public org.compiere.model.I_A_Asset getA_Asset() throws RuntimeException;
 
     /** Column name AD_Client_ID */
     public static final String COLUMNNAME_AD_Client_ID = "AD_Client_ID";
@@ -79,21 +64,6 @@ public interface I_RED_asset_assignment
 	  */
 	public int getAD_Org_ID();
 
-    /** Column name AD_User_ID */
-    public static final String COLUMNNAME_AD_User_ID = "AD_User_ID";
-
-	/** Set User/Contact.
-	  * User within the system - Internal or Business Partner Contact
-	  */
-	public void setAD_User_ID (int AD_User_ID);
-
-	/** Get User/Contact.
-	  * User within the system - Internal or Business Partner Contact
-	  */
-	public int getAD_User_ID();
-
-	public org.compiere.model.I_AD_User getAD_User() throws RuntimeException;
-
     /** Column name Assignment_Date */
     public static final String COLUMNNAME_Assignment_Date = "Assignment_Date";
 
@@ -103,35 +73,35 @@ public interface I_RED_asset_assignment
 	/** Get Assignment_Date	  */
 	public Timestamp getAssignment_Date();
 
-    /** Column name C_Activity_ID */
-    public static final String COLUMNNAME_C_Activity_ID = "C_Activity_ID";
+    /** Column name C_DocType_ID */
+    public static final String COLUMNNAME_C_DocType_ID = "C_DocType_ID";
 
-	/** Set Activity.
-	  * Business Activity
+	/** Set Document Type.
+	  * Document type or rules
 	  */
-	public void setC_Activity_ID (int C_Activity_ID);
+	public void setC_DocType_ID (int C_DocType_ID);
 
-	/** Get Activity.
-	  * Business Activity
+	/** Get Document Type.
+	  * Document type or rules
 	  */
-	public int getC_Activity_ID();
+	public int getC_DocType_ID();
 
-	public org.compiere.model.I_C_Activity getC_Activity() throws RuntimeException;
+	public org.compiere.model.I_C_DocType getC_DocType() throws RuntimeException;
 
-    /** Column name C_Location_ID */
-    public static final String COLUMNNAME_C_Location_ID = "C_Location_ID";
+    /** Column name C_DocTypeTarget_ID */
+    public static final String COLUMNNAME_C_DocTypeTarget_ID = "C_DocTypeTarget_ID";
 
-	/** Set Address.
-	  * Location or Address
+	/** Set Target Document Type.
+	  * Target document type for conversing documents
 	  */
-	public void setC_Location_ID (int C_Location_ID);
+	public void setC_DocTypeTarget_ID (int C_DocTypeTarget_ID);
 
-	/** Get Address.
-	  * Location or Address
+	/** Get Target Document Type.
+	  * Target document type for conversing documents
 	  */
-	public int getC_Location_ID();
+	public int getC_DocTypeTarget_ID();
 
-	public I_C_Location getC_Location() throws RuntimeException;
+	public org.compiere.model.I_C_DocType getC_DocTypeTarget() throws RuntimeException;
 
     /** Column name Created */
     public static final String COLUMNNAME_Created = "Created";
@@ -162,6 +132,45 @@ public interface I_RED_asset_assignment
 	  */
 	public String getDescription();
 
+    /** Column name DocAction */
+    public static final String COLUMNNAME_DocAction = "DocAction";
+
+	/** Set Document Action.
+	  * The targeted status of the document
+	  */
+	public void setDocAction (String DocAction);
+
+	/** Get Document Action.
+	  * The targeted status of the document
+	  */
+	public String getDocAction();
+
+    /** Column name DocStatus */
+    public static final String COLUMNNAME_DocStatus = "DocStatus";
+
+	/** Set Document Status.
+	  * The current status of the document
+	  */
+	public void setDocStatus (String DocStatus);
+
+	/** Get Document Status.
+	  * The current status of the document
+	  */
+	public String getDocStatus();
+
+    /** Column name DocumentNo */
+    public static final String COLUMNNAME_DocumentNo = "DocumentNo";
+
+	/** Set Document No.
+	  * Document sequence number of the document
+	  */
+	public void setDocumentNo (String DocumentNo);
+
+	/** Get Document No.
+	  * Document sequence number of the document
+	  */
+	public String getDocumentNo();
+
     /** Column name Help */
     public static final String COLUMNNAME_Help = "Help";
 
@@ -188,6 +197,19 @@ public interface I_RED_asset_assignment
 	  */
 	public boolean isActive();
 
+    /** Column name IsApproved */
+    public static final String COLUMNNAME_IsApproved = "IsApproved";
+
+	/** Set Approved.
+	  * Indicates if this document requires approval
+	  */
+	public void setIsApproved (boolean IsApproved);
+
+	/** Get Approved.
+	  * Indicates if this document requires approval
+	  */
+	public boolean isApproved();
+
     /** Column name isAssigned */
     public static final String COLUMNNAME_isAssigned = "isAssigned";
 
@@ -209,6 +231,41 @@ public interface I_RED_asset_assignment
 	  * Alphanumeric identifier of the entity
 	  */
 	public String getName();
+
+    /** Column name Processed */
+    public static final String COLUMNNAME_Processed = "Processed";
+
+	/** Set Processed.
+	  * The document has been processed
+	  */
+	public void setProcessed (boolean Processed);
+
+	/** Get Processed.
+	  * The document has been processed
+	  */
+	public boolean isProcessed();
+
+    /** Column name ProcessedOn */
+    public static final String COLUMNNAME_ProcessedOn = "ProcessedOn";
+
+	/** Set Processed On.
+	  * The date+time (expressed in decimal format) when the document has been processed
+	  */
+	public void setProcessedOn (BigDecimal ProcessedOn);
+
+	/** Get Processed On.
+	  * The date+time (expressed in decimal format) when the document has been processed
+	  */
+	public BigDecimal getProcessedOn();
+
+    /** Column name Processing */
+    public static final String COLUMNNAME_Processing = "Processing";
+
+	/** Set Process Now	  */
+	public void setProcessing (boolean Processing);
+
+	/** Get Process Now	  */
+	public boolean isProcessing();
 
     /** Column name red_asset_assignment_ID */
     public static final String COLUMNNAME_red_asset_assignment_ID = "red_asset_assignment_ID";
