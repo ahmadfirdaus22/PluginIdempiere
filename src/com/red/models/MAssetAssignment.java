@@ -30,13 +30,13 @@ public class MAssetAssignment extends X_RED_Asset_Assignment implements DocActio
 		// TODO Auto-generated constructor stub
 	}
 
-	public MAssetAssignmentLine[] getLines (String whereClause) {
+	public List<MAssetAssignmentLine> getLines (String whereClause) {
 		StringBuilder whereClauseFinal = new StringBuilder(MAssetAssignmentLine.COLUMNNAME_red_asset_assignment_ID+"=? ");
 		List<MAssetAssignmentLine> list = new Query(getCtx(), I_RED_Asset_Assignment_Line.Table_Name, whereClauseFinal.toString(), get_TrxName())
 											.setParameters(get_ID())
 											.list();
 	
-		return list.toArray(new MAssetAssignmentLine[list.size()]);
+		return list;
 	}
 	
 	@Override

@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import org.adempiere.base.event.AbstractEventHandler;
 import org.adempiere.base.event.IEventTopics;
-import org.compiere.model.I_C_OrderLine;
 import org.compiere.model.MAsset;
 import org.compiere.model.PO;
 import org.compiere.model.Query;
@@ -38,8 +37,9 @@ public class AssignHandler extends AbstractEventHandler{
 				pstmt.setInt(1, assignmentID);
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
-					assetId = rs.getInt("A_Asset_ID");
-					userId = rs.getInt("AD_User_ID");
+					MAsset asset = new MAsset(null, rs.getInt("A_Asset_ID"), null);
+					asset.setAD_User_ID(rs.getInt("AD_User_ID"));
+					asset.saveEx();
 				}
 				rs.close();
 				pstmt.close();
@@ -48,9 +48,33 @@ public class AssignHandler extends AbstractEventHandler{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			MAsset asset = new MAsset(null, assetId, null);
-			asset.setAD_User_ID(userId);
-			asset.saveEx();
+			
+		}else if(event.getTopic().equals(IEventTopics.DOC_BEFORE_COMPLETE)) {
+			PO po = getPO(event);
+			assignmentID = po.get_ID();
+			MAssetAssignment assignment = new MAssetAssignment(null, assignmentID, null);
+			try {
+				Connection conn = DB.getConnection(); 
+				String sql = "Select * from RED_Asset_Assignment_Line where red_asset_assignment_ID = ? ";
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, assignmentID);
+				ResultSet rs = pstmt.executeQuery();
+				if(rs.next() == false) {
+					addErrorMessage(event, "This Assignment Don't Have any line");
+				}
+				while(rs.next()) {
+					MAsset asset = new MAsset(null, rs.getInt("A_Asset_ID"), null);
+					if(asset.getAD_User_ID() != 0) {
+						addErrorMessage(event, "This Asset Already Assigned in another Document");
+					}
+				}
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -58,6 +82,7 @@ public class AssignHandler extends AbstractEventHandler{
 	protected void initialize() {
 		// TODO Auto-generated method stub
 		registerTableEvent(IEventTopics.DOC_AFTER_COMPLETE,I_RED_Asset_Assignment.Table_Name);
+		registerTableEvent(IEventTopics.DOC_BEFORE_COMPLETE,I_RED_Asset_Assignment.Table_Name);
 	}
 	
 }
